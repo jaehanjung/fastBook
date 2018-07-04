@@ -1,9 +1,37 @@
 import React from 'react';
 import PostForm from './PostForm';
-
-
+import PostList from './PostList';
+import PostPageProvider from '../contexts/PostPageContext';
+import postAPI from '../postAPI';
 export default class PostHeader extends React.Component {
+    state = {
+        textAreaValue: '',
+        id: '',
+      };
+    
+      detailValue = answerValue => {
+        this.setState({ textAreaValue: answerValue });
+      };
+ 
+      onUpdate = () => {
+        (this.state.id, this.state.textAreaValue);
+      };
+      idComunity = (id, body) => {
+        this.setState({
+          textAreaValue: body,
+          id: id,
+        });
+      };
+      deletePosts = async id => {
+        // 할일 삭제 할때 사용
+        this.setState({ loading: true });
+    
+        await postAPI.delete(`/posts/${id}`);
+      
+      };
+     
   render() {
+  
     const htmlStyle = {
       fill : "#fff"
     }
@@ -54,7 +82,7 @@ l-1.883,2.589v9.062H105.437z" />
         <h2 className="blind">사용자 메뉴</h2>
            <ul className="header-menu__btns">
                    <li>
-                     <PostForm />
+                     <PostForm onCreate={this.createPosts}/>
                     </li>
                     <li>
                         <button type="button">
@@ -64,11 +92,11 @@ l-1.883,2.589v9.062H105.437z" />
                         </button>
                     </li>
                     <li>
-                        <button type="button">
-                            <i className="fas fa-trash-alt" title="메모 삭제">
-                                <span className="blind">메모 삭제</span>
-                            </i>
-                        </button>
+                    <button
+         onClick={this.onUpdate}
+        >
+          삭제
+        </button>
                     </li>
                     <li>
                         <button type="button">

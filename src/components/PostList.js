@@ -1,7 +1,7 @@
 import React from 'react';
 import PostItem from './PostItem';
 import debounce from 'lodash.debounce';
-
+import PostHeader from './PostHeader';
 export default class PostList extends React.Component {
   state = {
     textAreaValue: '',
@@ -33,6 +33,7 @@ export default class PostList extends React.Component {
     const { posts, deletePosts, privatePosts } = this.props;
     return (
       <div>
+        <PostHeader deletePosts={deletePosts} />
         <section id="wrap" className="">
           <section id="container" className="container" role="main">
 
