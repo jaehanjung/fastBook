@@ -33,7 +33,53 @@ export default class PostList extends React.Component {
     const { posts, deletePosts, privatePosts } = this.props;
     return (
       <div>
-        <ul>
+        <section id="wrap" className="">
+          <section id="container" className="container" role="main">
+
+            <div className="memo-side">
+              <h2 className="blind">메모 리스트</h2>
+              <ul className="memo-side__list">
+
+                <li className="on">
+                  {posts
+                    .map(post => (
+                      <PostItem
+                        key={post.id}
+                        {...post}
+                        deletePosts={deletePosts}
+                        detailValue={this.detailValue}
+                        updatePosts={this.updatePosts}
+                        privatePosts={privatePosts}
+                        idComunity={this.idComunity}
+                      />
+                    ))
+                    .reverse()}
+                </li>
+              </ul>
+            </div>
+
+            <div className="memo-contents">
+              <div className="memo-contents__form">
+                <fieldset className="memo-contents__fieldset">
+                  <legend className="blind">메모 입력 폼</legend>
+                  <label htmlFor="contentTextarea" className="blind">내용</label>
+                  <textarea
+                    id="contentTextarea" className="memo-contents__fieldset-textarea"
+                    key={posts.id}
+                    name="detailContent"
+                    cols="30"
+                    rows="10"
+                    placeholder="여기에 내용이 뜹니다."
+                    value={this.state.textAreaValue}
+                    onChange={this.handleChangeView}
+                  />
+                </fieldset>
+              </div>
+            </div>
+
+          </section>
+        </section>
+        {/* <ul>
           {posts
             .map(post => (
               <PostItem
@@ -47,8 +93,8 @@ export default class PostList extends React.Component {
               />
             ))
             .reverse()}
-        </ul>
-        <div>
+        </ul> */}
+        {/* <div>
           <textarea
             key={posts.id}
             name="detailContent"
@@ -58,8 +104,8 @@ export default class PostList extends React.Component {
             value={this.state.textAreaValue}
             onChange={this.handleChangeView}
           />
-        </div>
-        <button
+        </div> */}
+        {/* <button
           onClick={e => {
             deletePosts(this.state.id);
           }}
@@ -72,7 +118,7 @@ export default class PostList extends React.Component {
           }}
         >
           잠금
-        </button>
+        </button> */}
       </div>
     );
   }
